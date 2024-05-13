@@ -11,30 +11,25 @@ const CourseSchema = new Schema(
 		},
 		description: {
 			type: String,
-			required: true,
 		},
 		author: {
 			type: Schema.Types.ObjectId,
 			required: true,
 			ref: "User",
 		},
-		categories: {
-			type: [String],
-			required: true,
+		category: {
+			type: String,
 		},
 		lessons: [
 			{
 				title: {
 					type: String,
-					required: true,
 				},
 				description: {
 					type: String,
-					required: true,
 				},
 				contentUrl: {
 					type: String,
-					required: true,
 				},
 				contentType: {
 					type: String,
@@ -50,12 +45,15 @@ const CourseSchema = new Schema(
 		],
 		price: {
 			type: Number,
-			required: true,
 		},
 		status: {
 			type: String,
 			enum: ["Active", "Inactive", "Deleted"],
 			default: "Active",
+		},
+		isPublished: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	{

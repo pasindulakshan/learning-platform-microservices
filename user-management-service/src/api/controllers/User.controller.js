@@ -44,6 +44,7 @@ const loginUser = async (request, response, next) => {
 
 				const data = {
 					_id: user._id,
+					name: user.name,
 					email: user.email,
 					token: authToken,
 					role: user.role,

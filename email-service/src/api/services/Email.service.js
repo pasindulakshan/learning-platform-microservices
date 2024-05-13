@@ -24,8 +24,8 @@ const sendWelcomeEmail = async (user) => {
 				instructions: "Click the button below to start learning.",
 				button: {
 					color: "#22BC66",
-					text: "View Timetable",
-					link: "http://localhost:3000/timetable",
+					text: "Start learning",
+					link: "http://localhost:5173",
 				},
 			},
 			outro: "Need help, or have questions? Just reply to this email, we'd love to help.",

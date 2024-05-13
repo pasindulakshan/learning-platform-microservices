@@ -32,7 +32,7 @@ router.get(
 	CourseController.getCoursesByAuthorId
 );
 
-router.put(
+router.patch(
 	"/:id",
 	instructor_auth,
 	CourseValidator.validateUpdateCourse,

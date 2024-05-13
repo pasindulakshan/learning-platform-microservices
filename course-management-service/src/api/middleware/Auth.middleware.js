@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import logger from "../../util/logger.js";
-import User from "../models/Course.model.js";
 
 const verifyAuthToken = async (authToken) => {
 	const secret = process.env.ACCESS_TOKEN_SECRET;
@@ -20,23 +19,15 @@ export const user_auth = async (request, response, next) => {
 
 		const authToken = request.headers.authorization.split(" ")[1];
 		const decoded = await verifyAuthToken(authToken);
-		const user = await User.findOne({
-			_id: decoded,
-			authToken: authToken,
-		});
 
-		if (!user) {
-			throw new Error("User not found in the system");
-		}
-
-		if (user.role !== "Admin" && user.role !== "Faculty" && user.role !== "Student") {
+		if (decoded.role !== "Admin" && decoded.role !== "Instructor" && decoded.role !== "Student") {
 			throw new Error("Do not have permission to access this resource");
 		}
 
 		request.authToken = authToken;
-		request.user = user;
+		request.user = decoded;
 
-		logger.info(`Authentication Token for ID ${user._id} is Accepted`);
+		logger.info(`Authentication Token for ID ${decoded._id} is Accepted`);
 		next();
 	} catch (error) {
 		logger.warn(error.message);
@@ -53,23 +44,15 @@ export const admin_auth = async (request, response, next) => {
 
 		const authToken = request.headers.authorization.split(" ")[1];
 		const decoded = await verifyAuthToken(authToken);
-		const user = await User.findOne({
-			_id: decoded,
-			authToken: authToken,
-		});
 
-		if (!user) {
-			throw new Error("User not found in the system");
-		}
-
-		if (user.role !== "Admin") {
+		if (decoded.role !== "Admin") {
 			throw new Error("Do not have permission to access this resource");
 		}
 
 		request.authToken = authToken;
-		request.user = user;
+		request.user = decoded;
 
-		logger.info(`Authentication Token for ID ${user._id} is Accepted`);
+		logger.info(`Authentication Token for ID ${decoded._id} is Accepted`);
 		next();
 	} catch (error) {
 		logger.warn(error.message);
@@ -86,23 +69,15 @@ export const instructor_auth = async (request, response, next) => {
 
 		const authToken = request.headers.authorization.split(" ")[1];
 		const decoded = await verifyAuthToken(authToken);
-		const user = await User.findOne({
-			_id: decoded,
-			authToken: authToken,
-		});
 
-		if (!user) {
-			throw new Error("User not found in the system");
-		}
-
-		if (user.role !== "Instructor" && user.role !== "Admin") {
+		if (decoded.role !== "Instructor" && decoded.role !== "Admin") {
 			throw new Error("Do not have permission to access this resource");
 		}
 
 		request.authToken = authToken;
-		request.user = user;
+		request.user = decoded;
 
-		logger.info(`Authentication Token for ID ${user._id} is Accepted`);
+		logger.info(`Authentication Token for ID ${decoded._id} is Accepted`);
 		next();
 	} catch (error) {
 		logger.warn(error.message);
@@ -119,23 +94,15 @@ export const student_auth = async (request, response, next) => {
 
 		const authToken = request.headers.authorization.split(" ")[1];
 		const decoded = await verifyAuthToken(authToken);
-		const user = await User.findOne({
-			_id: decoded,
-			authToken: authToken,
-		});
 
-		if (!user) {
-			throw new Error("User not found in the system");
-		}
-
-		if (user.role !== "Student" && user.role !== "Admin") {
+		if (decoded.role !== "Student" && decoded.role !== "Admin") {
 			throw new Error("Do not have permission to access this resource");
 		}
 
 		request.authToken = authToken;
-		request.user = user;
+		request.user = decoded;
 
-		logger.info(`Authentication Token for ID ${user._id} is Accepted`);
+		logger.info(`Authentication Token for ID ${decoded._id} is Accepted`);
 		next();
 	} catch (error) {
 		logger.warn(error.message);

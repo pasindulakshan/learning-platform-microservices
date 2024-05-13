@@ -2,7 +2,6 @@ import app from "./app.js";
 import logger from "./util/logger.js";
 import configs from "./config/index.js";
 import connect from "./util/database.connection.js";
-import producer from "./config/kafka.js";
 
 const PORT = configs.PORT;
 const ENVIRONMENT = configs.ENV;
@@ -17,13 +16,5 @@ app.get("/", (req, res, next) => {
 app.listen(PORT, () => {
 	logger.info(`Starting on ${ENVIRONMENT} Environment`);
 	connect();
-	producer.connect();
-	producer.on("ready", () => {
-		logger.info("Kafka Producer is connected and ready.");
-	});
-
-	producer.on("event.error", (err) => {
-		logger.error("Error from producer", err);
-	});
 	logger.info(`API Server up and running on PORT ${PORT}`);
 });
