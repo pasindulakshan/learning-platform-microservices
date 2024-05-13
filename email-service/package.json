@@ -1,7 +1,7 @@
 {
-	"name": "user-management-service",
+	"name": "course-management-service",
 	"version": "1.0.0",
-	"description": "User Management Service",
+	"description": "Course Management Service",
 	"main": "server.js",
 	"type": "module",
 	"scripts": {
@@ -27,6 +27,7 @@
 		"express-validator": "^7.0.1",
 		"helmet": "^7.1.0",
 		"jsonwebtoken": "^8.5.1",
+		"kafkajs": "^2.2.4",
 		"mailgen": "^2.0.28",
 		"mongoose": "^6.5.2",
 		"node-rdkafka": "^3.0.1",
