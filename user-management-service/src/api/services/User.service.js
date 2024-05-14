@@ -1,4 +1,4 @@
-import User from "../models/User.model";
+import User from "../models/User.model.js";
 
 //Authenticate a user
 const authenticateUser = async (email, password) => {

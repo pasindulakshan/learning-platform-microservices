@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { user_auth, admin_auth } from "../middleware";
-import UserController from "../controllers/User.controller";
-import UserValidator from "../validators/User.validator";
-import handleValidationErrors from "../../util/validation.handler";
+import { user_auth, admin_auth } from "../middleware/index.js";
+import UserController from "../controllers/User.controller.js";
+import UserValidator from "../validators/User.validator.js";
+import handleValidationErrors from "../../util/validation.handler.js";
 
 const router = Router();
 

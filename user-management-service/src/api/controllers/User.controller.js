@@ -1,5 +1,5 @@
-import UserService from "../services/User.service";
-import logger from "../../util/logger";
+import UserService from "../services/User.service.js";
+import logger from "../../util/logger.js";
 
 // User login
 const loginUser = async (request, response, next) => {

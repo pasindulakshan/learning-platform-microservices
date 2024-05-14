@@ -3,9 +3,9 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import responseHandler from "./util/response.handler";
-import router from "./api/routes";
-import specs from "./config/swagger";
+import responseHandler from "./util/response.handler.js";
+import router from "./api/routes/index.js";
+import specs from "./config/swagger.js";
 import swaggerUi from "swagger-ui-express";
 
 const app = express();

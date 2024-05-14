@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "User Management Service",
 	"main": "server.js",
+	"type": "module",
 	"scripts": {
 		"start": "cross-env NODE_ENV=Development nodemon --exec babel-node src/server.js",
 		"test": "jest --forceExit",

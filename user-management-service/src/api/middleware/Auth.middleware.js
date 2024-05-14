@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
-import logger from "../../util/logger";
-import User from "../models/User.model";
+import jwt from "jsonwebtoken";
+import logger from "../../util/logger.js";
+import User from "../models/User.model.js";
 
 const verifyAuthToken = async (authToken) => {
 	const secret = process.env.ACCESS_TOKEN_SECRET;

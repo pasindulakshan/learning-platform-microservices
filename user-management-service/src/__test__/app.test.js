@@ -2,7 +2,7 @@
 
 import request from "supertest";
 import app from "../app";
-const db = require("../util/testing.db");
+const db = require("../util/testing.db.js");
 
 beforeAll(async () => {
 	await db.connect();

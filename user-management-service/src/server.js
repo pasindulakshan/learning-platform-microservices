@@ -1,7 +1,7 @@
-import app from "./app";
-import logger from "./util/logger";
-import configs from "./config";
-import connect from "./util/database.connection";
+import app from "./app.js";
+import logger from "./util/logger.js";
+import configs from "./config/index.js";
+import connect from "./util/database.connection.js";
 
 const PORT = configs.PORT;
 const ENVIRONMENT = configs.ENV;
