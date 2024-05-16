@@ -18,7 +18,7 @@ COPY . .
 COPY .env ./
 
 # Expose the port your app runs on
-EXPOSE 8082
+EXPOSE 8081
 
 # Command to run the application
 CMD ["node", "src/server.js"]

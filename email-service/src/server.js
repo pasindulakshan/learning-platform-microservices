@@ -21,15 +21,46 @@ const consumer = new Kafka.KafkaConsumer(kafkaConfig, {});
 
 consumer.connect();
 
+// const EmailService = {
+// 	sendWelcomeEmail,
+// 	sendAdminAcceptanceEmail,
+// 	sendPaymentConfirmationEmail,
+// 	sendEnrollmentEmail,
+// 	sendNewPurchaseEmailToAuthor,
+// };
 consumer.on("ready", () => {
 	logger.info("Consumer connected to Kafka");
-	consumer.subscribe(["USER_REGISTERED"]);
+	consumer.subscribe([
+		"USER_REGISTERED",
+		"COURSE_ACCEPTED_BY_ADMIN",
+		"PAYMENT_SUCCESSFUL",
+		"ENROLLMENT_SUCCESSFUL",
+		"NEW_PURCHASE",
+	]);
 	consumer.consume();
 });
 
 consumer.on("data", async (data) => {
 	const user = JSON.parse(data.value.toString());
-	EmailService.sendWelcomeEmail(user);
+	logger.info(`Received message with topic ${data.topic} with data: ${JSON.stringify(user)}`);
+
+	switch (data.topic) {
+		case "USER_REGISTERED":
+			await EmailService.sendWelcomeEmail(user);
+			break;
+		case "COURSE_ACCEPTED_BY_ADMIN":
+			await EmailService.sendAdminAcceptanceEmail(user);
+			break;
+		case "PAYMENT_SUCCESSFUL":
+			await EmailService.sendPaymentConfirmationEmail(user);
+			break;
+		case "ENROLLMENT_SUCCESSFUL":
+			await EmailService.sendEnrollmentEmail(user);
+			break;
+		case "NEW_PURCHASE":
+			await EmailService.sendNewPurchaseEmailToAuthor(user);
+			break;
+	}
 });
 
 consumer.on("event.error", (error) => {
